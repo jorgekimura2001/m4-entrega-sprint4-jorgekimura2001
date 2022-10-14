@@ -3,7 +3,12 @@ import AppDataSource from "../../data-source"
 import { User } from "../../entities/users.entity"
 import { IUserUpdate } from "../../interfaces/users"
 
-const updateUserService = async (data: IUserUpdate, id: string) => {
+const updateUserService = async (data: IUserUpdate, id: string, isAdm: boolean) => {
+
+    if(isAdm === false){
+        throw new Error('User is not admin')
+    }
+
     if(data.name !== undefined || data.email !== undefined || data.password !== undefined){
         const userRepository = AppDataSource.getRepository(User)
     
@@ -21,8 +26,6 @@ const updateUserService = async (data: IUserUpdate, id: string) => {
 
         const userUpdated = await userRepository.findOneBy({id}) 
 
-        const {password: pwd, ...userToShow} = userUpdated!
-    
         return userUpdated
     }
     
