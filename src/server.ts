@@ -1,7 +1,7 @@
 import app from "./app";
 import AppDataSource from "./data-source";
 
-(async () => {
+async function init(){
 
     await AppDataSource.initialize()
     .catch((err) => {
@@ -11,4 +11,6 @@ import AppDataSource from "./data-source";
     app.listen(3000, () => {
         console.log("Servidor executando")
     })    
-})()
+}
+  
+init();
