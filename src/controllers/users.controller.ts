@@ -34,9 +34,9 @@ export const updateUserController = async(req: Request, res: Response) => {
     try {
         const data = req.body
         const {id} = req.params
-        const {isAdm} = req.user
+        const {isAdm, id: idUser} = req.user
 
-        const updatedUser = await updateUserService(data, id, isAdm)
+        const updatedUser = await updateUserService(data, id, isAdm, idUser)
 
         return res.json(updatedUser)
 

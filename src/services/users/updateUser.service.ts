@@ -3,7 +3,11 @@ import AppDataSource from "../../data-source"
 import { User } from "../../entities/users.entity"
 import { IUserUpdate } from "../../interfaces/users"
 
-const updateUserService = async (data: IUserUpdate, id: string, isAdm: boolean) => {
+const updateUserService = async (data: IUserUpdate, id: string, isAdm: boolean, idUser: string) => {
+
+    if(idUser !== id && isAdm === false ){
+        throw new Error('User can only update himself and not others')
+    }
 
     if(isAdm === false){
         throw new Error('User is not admin')
