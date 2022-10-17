@@ -32,9 +32,7 @@ const createUserService = async ({name, email, password, isAdm }: IUserRequestVa
 
     await userRepository.save(createdUser)
 
-    const {password: pwdHidden, ...user} = createdUser 
-
-    return user
+    return createdUser
 }
 
 export default createUserService

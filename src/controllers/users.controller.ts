@@ -1,3 +1,4 @@
+import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
 import createUserService from "../services/users/createUser.service";
 import deleteUserService from "../services/users/deleteUser.service";
@@ -10,7 +11,7 @@ export const createUserController = async (req: Request, res: Response) => {
 
         const createdUser = await createUserService(data)
 
-        return res.status(201).json(createdUser)
+        return res.status(201).json(instanceToPlain(createdUser))
 
     } catch (error) {
         if(error instanceof Error){
@@ -25,7 +26,7 @@ export const listUsersController = async(req: Request, res: Response) => {
 
     const users = await listUsersService()
 
-    return res.send(users)
+    return res.send(instanceToPlain(users))
 
 }
 
